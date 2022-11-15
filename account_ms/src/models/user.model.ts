@@ -19,6 +19,7 @@ const loginSchema = Joi.object ({
 // Interfaces
 
 interface userI {
+    userID?: number;
     firstName: string
     lastName: string
     email: string
