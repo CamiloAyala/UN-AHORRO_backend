@@ -1,9 +1,18 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { createHmac } from 'crypto';
-import { userI } from '../models/user.model';
+import jwt from 'jsonwebtoken';
+
+import { loginI, userI } from '../models/user.model';
+import { JWT_SECRET } from '../config/config';
+import { token } from 'morgan';
 
 const prisma = new PrismaClient();
+
+function createJWTToken(payload: any){
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+}
+
 
 export const signUp = async (req: Request, res: Response) => {
     const user: userI = req.body as userI;
@@ -35,6 +44,46 @@ export const signUp = async (req: Request, res: Response) => {
     }
 }
 
-export const logIn = (req: Request, res: Response) => {
-    res.send("login");
+export const logIn = async (req: Request, res: Response) => {
+    const credentials: loginI = req.body as loginI;
+
+    try{
+
+        const user = await prisma.user.findUnique({
+            where: {
+                email: credentials.email
+            }
+        })
+
+        if(user == null){
+            return res.status(404).json({
+                message: "Invalid email or password."
+            })
+        }
+
+        let loginPassword = createHmac('sha512', "").update(credentials.password).digest('hex')
+        
+        if(loginPassword != user.password){
+            return res.status(404).json({
+                message: "Invalid email or password."
+            })
+        }
+
+        let payload = {
+            id: user.userID,
+            email: user.email
+        }
+
+        return res.status(200).json({
+            token: createJWTToken(payload),
+            payload: user,           
+            firstName: user.firstName,
+            lastName: user.lastName,
+            photo: user.photo,
+
+        });
+
+    }catch(error){
+        return res.status(400).json(error)
+    }
 }
