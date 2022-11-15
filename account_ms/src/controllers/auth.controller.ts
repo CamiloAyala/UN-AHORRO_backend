@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
+import { createHmac } from 'crypto';
 import { userI } from '../models/user.model';
 
 const prisma = new PrismaClient();
@@ -7,10 +8,10 @@ const prisma = new PrismaClient();
 export const signUp = async (req: Request, res: Response) => {
     const user: userI = req.body as userI;
 
-    // TODO: Password hashing
-
     try {
-        const create = await prisma.user.create({
+        user.password = createHmac('sha512', "").update(user.password).digest('hex')
+        
+        await prisma.user.create({
             data: {
                 ...user
             }
