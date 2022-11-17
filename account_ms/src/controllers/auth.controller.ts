@@ -76,7 +76,6 @@ export const logIn = async (req: Request, res: Response) => {
 
         return res.status(200).json({
             token: createJWTToken(payload),
-            payload: user,           
             firstName: user.firstName,
             lastName: user.lastName,
             photo: user.photo,

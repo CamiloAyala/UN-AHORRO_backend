@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: payment_db
+    ports: 
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: "evaluation"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "evaluation_db"
