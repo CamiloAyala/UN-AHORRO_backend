@@ -23,4 +23,6 @@ public class QuestionController {
     public ArrayList<Question> getQuestionsByLevel(@Validated @RequestParam("level") Integer level ){
         return (ArrayList<Question>) questionRepository.findByQuestionLevel(level);
     }
+
+    // TODO: Get questions with their respective answer options
 }

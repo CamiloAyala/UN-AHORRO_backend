@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "answers")
 public class Answer {
@@ -22,13 +24,18 @@ public class Answer {
 
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "questionID")
-    private Integer questionID;
+    @JsonIgnore
+    private Question question;
 
-    public Answer(Integer answerID, String answerText, boolean isCorrect, Integer questionID) {
+    public Answer() {
+        super();
+    }
+
+    public Answer(Integer answerID, String answerText, boolean isCorrect, Question question) {
         this.answerID = answerID;
         this.answerText = answerText;
         this.isCorrect = isCorrect;
-        this.questionID = questionID;
+        this.question = question;
     }
 
     public Integer getAnswerID() {
@@ -55,12 +62,12 @@ public class Answer {
         this.isCorrect = isCorrect;
     }
 
-    public Integer getQuestionID() {
-        return questionID;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionID(Integer questionID) {
-        this.questionID = questionID;
+    public void setQuestionID(Question question) {
+        this.question = question;
     }   
 
 }

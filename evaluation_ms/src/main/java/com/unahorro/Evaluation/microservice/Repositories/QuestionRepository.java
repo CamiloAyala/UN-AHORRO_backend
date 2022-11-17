@@ -10,4 +10,6 @@ import com.unahorro.Evaluation.microservice.Models.Question;
 @Repository
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
     ArrayList<Question> findByQuestionLevel(Integer questionLevel);
+
+    // TODO: Add query to get question with answers options
 }
