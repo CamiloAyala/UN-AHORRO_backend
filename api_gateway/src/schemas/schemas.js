@@ -1,14 +1,16 @@
 import _ from 'lodash';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { authTypeDefs, authResolvers } from './auth/schema.js';
-//import { authResolvers } from '../resolvers/auth/authResolver.js';
+import { questionTypeDefs, questionResolvers } from './question/schema.js';
 
 const typeDefs = [
-    authTypeDefs
+    authTypeDefs,
+    questionTypeDefs
 ]
 
 const resolvers = _.merge(
-    authResolvers
+    authResolvers,
+    questionResolvers,
 )
 
 export const schema = makeExecutableSchema ({ 
