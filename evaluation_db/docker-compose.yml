@@ -3,11 +3,11 @@ version: '3.7'
 services:
   db:
     image: postgres:latest
-    container_name: payment_db
+    container_name: evaluation_db
     ports: 
-      - "5432:5432"
+      - ${PORT}:${PORT}
     restart: always
     environment:
-      POSTGRES_USER: "evaluation"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DB: "evaluation_db"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
