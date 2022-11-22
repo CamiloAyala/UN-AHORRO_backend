@@ -5,7 +5,7 @@ export class AccountAPI extends RESTDataSource {
     
     constructor(){
         super();
-        this.baseURL = "http://localhost:3000";        
+        this.baseURL = "http://34.71.114.156:3000";        
     }
 
     async login(payload){

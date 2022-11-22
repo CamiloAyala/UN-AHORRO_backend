@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors"
 import passport from "passport";
 
-import { PORT } from "./config/config";
+//import { PORT } from "./config/config";
 import passportMiddleware from "./middlewares/passport.middleware";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
@@ -12,7 +12,7 @@ import userRoutes from "./routes/user.routes";
 const app = express();
 
 // App
-app.set('port', PORT);
+//app.set('port', PORT);
 
 // Middlewares
 app.use(morgan('dev'));
