@@ -3,7 +3,7 @@ import { RESTDataSource } from "@apollo/datasource-rest";
 export class QuestionAPI extends RESTDataSource {
     constructor() {
         super();
-        this.baseURL = "http://localhost:8080";
+        this.baseURL = "http://34.170.7.111:8080";
     }
 
     async getQuestions(level) {

@@ -3,6 +3,9 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { AccountAPI } from './datasources/AccountApi.js';
 import { QuestionAPI } from './datasources/QuestionApi.js';
 import { schema } from './schemas/schemas.js';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const server = new ApolloServer({
     schema: schema,
@@ -15,8 +18,9 @@ const server = new ApolloServer({
     
 });
 
+
 const { url } = await startStandaloneServer(server,{
-    listen: { port: 4000},
+    listen: { port: process.env.PORT || 4000},
     context: async () => {
         const { cache } = server;
         return {

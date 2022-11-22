@@ -18,5 +18,5 @@ RUN npx prisma generate
 RUN chown -R node:node /usr/src/app/
 USER node
 
-CMD npx prisma migrate deploy && npm run start
+CMD npx prisma migrate deploy && npm run build && npm run start
 
