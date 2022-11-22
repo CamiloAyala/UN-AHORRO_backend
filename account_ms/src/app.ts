@@ -12,7 +12,7 @@ import userRoutes from "./routes/user.routes";
 const app = express();
 
 // App
-app.set('port', PORT);
+//app.set('port', PORT);
 
 // Middlewares
 app.use(morgan('dev'));
