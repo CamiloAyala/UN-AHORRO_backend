@@ -1,4 +1,5 @@
 import { RESTDataSource } from "@apollo/datasource-rest";
+import axios from "axios";
 
 export class QuestionAPI extends RESTDataSource {
     constructor() {
@@ -7,8 +8,8 @@ export class QuestionAPI extends RESTDataSource {
     }
 
     async getQuestions(level) {
-        console.log("Level: " + level);
-        return this.get(`/questions?level=${level}`);
+        const response = await axios.get(this.baseURL + '/questions?level=' + level);
+        return response.data;
     }
 
     async getAnswers(questionID) {
